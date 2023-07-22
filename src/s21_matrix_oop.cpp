@@ -2,7 +2,7 @@ using namespace std;
 
 #include "s21_matrix_oop.h"
 
-S21Matrix::S21Matrix(): _rows(DEFAULT_X), _cols(DEFAULT_Y) {}
+S21Matrix::S21Matrix(): _rows(DEFAULT_X), _cols(DEFAULT_Y) {this->ALLOCATE_MEMORY();}
 S21Matrix::S21Matrix(int x, int y) : _rows(x), _cols(y) {(x < 0 || y < 0) ? throw out_of_range("Error: out of range"): this->ALLOCATE_MEMORY();}
 S21Matrix::~S21Matrix() {this->DESTROY_MATRIX();}
 
@@ -83,9 +83,9 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
 S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
     WRONG_DIMENSIONS();
     S21Matrix result(_rows, other._cols);
-    for (int i = 0; i < _rows; ++i) {
-        for (int j = 0; j < other._cols; ++j) {
-            for (int k = 0; k < _cols; ++k) {
+    for (int i = 0; i < _rows; i++) {
+        for (int j = 0; j < other._cols; j++) {
+            for (int k = 0; k < _cols; k++) {
                 result._matrix[i][j] += _matrix[i][k] * other._matrix[k][j];
             }
         }
