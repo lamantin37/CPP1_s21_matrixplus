@@ -90,3 +90,4 @@ clean:
 	-rm -rf *.info && rm -rf *.gcov
 	-rm -rf ./test && rm -rf ./gcov_report
 	-rm -rf ./report/
+	-rm -rf *.gch

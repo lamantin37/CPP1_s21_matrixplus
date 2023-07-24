@@ -24,6 +24,7 @@ double& S21Matrix::operator()(int row, int col) {
 }
 
 void S21Matrix::setRows(int rows) {
+  INVALID_SETTER(rows);
   if (rows < _rows) {
     _matrix.resize(rows);
   } else if (rows > _rows) {
@@ -33,6 +34,7 @@ void S21Matrix::setRows(int rows) {
 }
 
 void S21Matrix::setCols(int cols) {
+  INVALID_SETTER(cols);
   if (cols < _cols) {
     for (int i = 0; i < _rows; ++i) {
       _matrix[i].resize(cols);
@@ -64,8 +66,7 @@ S21Matrix S21Matrix::operator*(double scalar) const {
 
 S21Matrix operator*(double scalar, const S21Matrix& other) {
   S21Matrix result;
-  result = other;
-  result *= scalar;
+  result = other * scalar;
   return result;
 }
 
@@ -129,9 +130,9 @@ bool S21Matrix::eq_matrix(const S21Matrix& other) {
 
 S21Matrix S21Matrix::transpose() {
   S21Matrix result(this->_cols, this->_rows);
-  for (int x = 0; x < _rows; ++x) {
-    for (int y = 0; y < _cols; ++y) {
-      result._matrix[y][x] = _matrix[x][y];
+  for (int i = 0; i < _rows; ++i) {
+    for (int j = 0; j < _cols; ++j) {
+      result._matrix[j][i] = _matrix[i][j];
     }
   }
   return result;
@@ -192,7 +193,7 @@ S21Matrix S21Matrix::calc_complements() {
 }
 
 S21Matrix S21Matrix::inverse_matrix() {
-  NOT_SQUARED_MATRIX();  // Ensure the matrix is square
+  NOT_SQUARED_MATRIX();
   double det = determinant();
   ZERO_DET();
   S21Matrix complements = calc_complements();

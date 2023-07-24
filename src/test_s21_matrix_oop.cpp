@@ -4,19 +4,19 @@ using namespace std;
 
 #include "s21_matrix_oop.h"
 
-TEST(MatrixTest, 1) {
+TEST(EqMatrix, 1) {
   S21Matrix matrix1;
   S21Matrix matrix2;
   EXPECT_TRUE(matrix1.eq_matrix(matrix2));
 }
 
-TEST(MatrixTest, 2) {
+TEST(EqMatrix, 2) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   EXPECT_TRUE(matrix1.eq_matrix(matrix2));
 }
 
-TEST(MatrixTest, 3) {
+TEST(EqMatrix, 3) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -33,19 +33,19 @@ TEST(MatrixTest, 3) {
   EXPECT_TRUE(matrix1.eq_matrix(matrix2));
 }
 
-TEST(MatrixTest, 4) {
+TEST(EqMatrix, 4) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 1);
   EXPECT_FALSE(matrix1.eq_matrix(matrix2));
 }
 
-TEST(MatrixTest, 5) {
+TEST(EqMatrix, 5) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(1, 2);
   EXPECT_FALSE(matrix1.eq_matrix(matrix2));
 }
 
-TEST(MatrixTest, 6) {
+TEST(EqMatrix, 6) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -62,7 +62,20 @@ TEST(MatrixTest, 6) {
   EXPECT_FALSE(matrix1.eq_matrix(matrix2));
 }
 
-TEST(MatrixTest, 7) {
+TEST(EqMatrix, 7) {
+  S21Matrix matrix1(2, 2);
+
+  matrix1(0, 0) = 1;
+  matrix1(0, 1) = 2;
+  matrix1(1, 0) = 3;
+  matrix1(1, 1) = 4;
+
+  S21Matrix matrix2(matrix1);
+
+  EXPECT_TRUE(matrix1.eq_matrix(matrix2));
+}
+
+TEST(SumMatrix, 1) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -86,7 +99,7 @@ TEST(MatrixTest, 7) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 8) {
+TEST(SumMatrix, 2) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -110,7 +123,7 @@ TEST(MatrixTest, 8) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 9) {
+TEST(SumMatrix, 3) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -134,7 +147,7 @@ TEST(MatrixTest, 9) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 10) {
+TEST(SubMatrix, 1) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -158,7 +171,7 @@ TEST(MatrixTest, 10) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 11) {
+TEST(SubMatrix, 2) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -182,7 +195,7 @@ TEST(MatrixTest, 11) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 12) {
+TEST(SubMatrix, 3) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -206,7 +219,31 @@ TEST(MatrixTest, 12) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 13) {
+TEST(SubMatrix, 4) {
+  S21Matrix matrix1(2, 3);
+  S21Matrix matrix2(3, 3);
+
+  matrix1(0, 0) = 0.25;
+  matrix1(0, 1) = 1.25;
+  matrix1(0, 2) = 2.25;
+  matrix1(1, 0) = 3.25;
+  matrix1(1, 1) = 4.25;
+  matrix1(1, 2) = 5.25;
+
+  matrix2(0, 0) = 9.25;
+  matrix2(0, 1) = 8.25;
+  matrix2(0, 2) = 7.25;
+  matrix2(1, 0) = 6.25;
+  matrix2(1, 1) = 5.25;
+  matrix2(1, 2) = 4.25;
+  matrix2(2, 0) = 3.25;
+  matrix2(2, 1) = 2.25;
+  matrix2(2, 2) = 1.25;
+
+  EXPECT_THROW(matrix1.sub_matrix(matrix2), invalid_argument);
+}
+
+TEST(MulMatrix, 1) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -230,7 +267,7 @@ TEST(MatrixTest, 13) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 14) {
+TEST(MulMatrix, 2) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -254,7 +291,7 @@ TEST(MatrixTest, 14) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 15) {
+TEST(MulMatrix, 3) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
   S21Matrix matrix3(2, 2);
@@ -278,7 +315,7 @@ TEST(MatrixTest, 15) {
   EXPECT_TRUE(matrix1 == matrix3);
 }
 
-TEST(MatrixTest, 16) {
+TEST(MulMatrix, 4) {
   S21Matrix matrix1(2, 1);
   S21Matrix matrix2(2, 2);
 
@@ -293,7 +330,7 @@ TEST(MatrixTest, 16) {
   EXPECT_THROW(matrix1.mul_matrix(matrix2), invalid_argument);
 }
 
-TEST(MatrixTest, 17) {
+TEST(MulMatrix, 5) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -310,7 +347,7 @@ TEST(MatrixTest, 17) {
   EXPECT_TRUE(matrix1.eq_matrix(matrix2 * 2));
 }
 
-TEST(MatrixTest, 18) {
+TEST(MulMatrix, 6) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -327,7 +364,7 @@ TEST(MatrixTest, 18) {
   EXPECT_TRUE(matrix1.eq_matrix(2 * matrix2));
 }
 
-TEST(MatrixTest, 19) {
+TEST(MulMatrix, 7) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -344,7 +381,7 @@ TEST(MatrixTest, 19) {
   EXPECT_TRUE(matrix1.eq_matrix(2 * matrix2));
 }
 
-TEST(MatrixTest, 20) {
+TEST(MulMatrix, 8) {
   S21Matrix matrix1(3, 3);
   S21Matrix matrix2(3, 3);
   S21Matrix matrix3(3, 3);
@@ -376,7 +413,28 @@ TEST(MatrixTest, 20) {
   EXPECT_TRUE(matrix3.eq_matrix(matrix1 * matrix2));
 }
 
-TEST(MatrixTest, 21) {
+TEST(MulNumber, 9) {
+  S21Matrix matrix1(1, 1);
+  matrix1(0, 0) = 3.3;
+  matrix1.mul_number(3);
+  EXPECT_DOUBLE_EQ(matrix1(0, 0), 9.9);
+}
+
+TEST(MulMatrix, 10) {
+  S21Matrix matrix1(2, 5);
+  matrix1(0, 0) = 3.0;
+  matrix1(0, 1) = -3.0;
+
+  S21Matrix matrix2(2, 2);
+  matrix2(0, 0) = 5.0;
+  matrix2(0, 1) = 3.0;
+  matrix2(1, 0) = 1.0;
+  matrix2(1, 1) = 3.0;
+
+  EXPECT_THROW(matrix1.mul_matrix(matrix2), invalid_argument);
+}
+
+TEST(DetMatrix, 1) {
   S21Matrix matrix1(2, 2);
 
   matrix1(0, 0) = 1;
@@ -387,13 +445,48 @@ TEST(MatrixTest, 21) {
   EXPECT_TRUE(matrix1.determinant() == -2);
 }
 
-TEST(MatrixTest, 22) {
+TEST(DetMatrix, 2) {
+  S21Matrix matrix1(5, 5);
+  matrix1(0, 0) = 4.0;
+  matrix1(0, 1) = 1.0;
+  matrix1(0, 2) = 1.0;
+  matrix1(0, 3) = 2.0;
+  matrix1(0, 4) = 1.0;
+
+  matrix1(1, 0) = 1.0;
+  matrix1(1, 1) = 2.0;
+  matrix1(1, 2) = -1.0;
+  matrix1(1, 3) = 1.0;
+  matrix1(1, 4) = 1.0;
+
+  matrix1(2, 0) = 3.0;
+  matrix1(2, 1) = 1.0;
+  matrix1(2, 2) = 1.0;
+  matrix1(2, 3) = 1.0;
+  matrix1(2, 4) = 1.0;
+
+  matrix1(3, 0) = 2.0;
+  matrix1(3, 1) = 1.0;
+  matrix1(3, 2) = 1.0;
+  matrix1(3, 3) = 4.0;
+  matrix1(3, 4) = 1.0;
+
+  matrix1(4, 0) = 2.0;
+  matrix1(4, 1) = -1.0;
+  matrix1(4, 2) = 1.0;
+  matrix1(4, 3) = 1.0;
+  matrix1(4, 4) = 5.0;
+  double result = matrix1.determinant();
+  EXPECT_DOUBLE_EQ(result, 64.0);
+}
+
+TEST(DetMatrix, 3) {
   S21Matrix matrix1(3, 2);
 
   EXPECT_THROW(matrix1.determinant(), invalid_argument);
 }
 
-TEST(MatrixTest, 23) {
+TEST(TransposeMatrix, 1) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -410,7 +503,7 @@ TEST(MatrixTest, 23) {
   EXPECT_TRUE(matrix1.eq_matrix(matrix2.transpose()));
 }
 
-TEST(MatrixTest, 24) {
+TEST(ComplementMatrix, 1) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -427,7 +520,37 @@ TEST(MatrixTest, 24) {
   EXPECT_TRUE(matrix2.eq_matrix(matrix1.calc_complements()));
 }
 
-TEST(MatrixTest, 25) {
+TEST(ComplementMatrix, 2) {
+  S21Matrix matrix1(3, 3);
+  matrix1(0, 0) = 1.0;
+  matrix1(0, 1) = 2.0;
+  matrix1(0, 2) = 3.0;
+
+  matrix1(1, 0) = 0.0;
+  matrix1(1, 1) = 4.0;
+  matrix1(1, 2) = 2.0;
+
+  matrix1(2, 0) = 5.0;
+  matrix1(2, 1) = 2.0;
+  matrix1(2, 2) = 1.0;
+
+  S21Matrix matrix2(3, 3);
+  matrix2(0, 0) = 0.0;
+  matrix2(0, 1) = 10.0;
+  matrix2(0, 2) = -20.0;
+
+  matrix2(1, 0) = 4.0;
+  matrix2(1, 1) = -14.0;
+  matrix2(1, 2) = 8.0;
+
+  matrix2(2, 0) = -8.0;
+  matrix2(2, 1) = -2.0;
+  matrix2(2, 2) = 4.0;
+  S21Matrix other_matrix = matrix1.calc_complements();
+  EXPECT_EQ(other_matrix.eq_matrix(matrix2), true);
+}
+
+TEST(InverseMatrix, 1) {
   S21Matrix matrix1(2, 2);
   S21Matrix matrix2(2, 2);
 
@@ -444,7 +567,38 @@ TEST(MatrixTest, 25) {
   EXPECT_TRUE(matrix2.eq_matrix(matrix1.inverse_matrix()));
 }
 
-TEST(MatrixTest, 26) {
+TEST(InverseMatrix, 2) {
+  S21Matrix matrix1(3, 3);
+  matrix1(0, 0) = 2.0;
+  matrix1(0, 1) = 5.0;
+  matrix1(0, 2) = 7.0;
+
+  matrix1(1, 0) = 6.0;
+  matrix1(1, 1) = 3.0;
+  matrix1(1, 2) = 4.0;
+
+  matrix1(2, 0) = 5.0;
+  matrix1(2, 1) = -2.0;
+  matrix1(2, 2) = -3.0;
+
+  S21Matrix matrix2(3, 3);
+  matrix2(0, 0) = 1.0;
+  matrix2(0, 1) = -1.0;
+  matrix2(0, 2) = 1.0;
+
+  matrix2(1, 0) = -38.0;
+  matrix2(1, 1) = 41.0;
+  matrix2(1, 2) = -34.0;
+
+  matrix2(2, 0) = 27.0;
+  matrix2(2, 1) = -29.0;
+  matrix2(2, 2) = 24.0;
+  S21Matrix other_matrix = matrix1.inverse_matrix();
+  EXPECT_EQ(other_matrix.eq_matrix(matrix2), true);
+  EXPECT_EQ(matrix1.eq_matrix(matrix2), false);
+}
+
+TEST(GetterMatrix, 1) {
   S21Matrix matrix1(3, 3);
 
   matrix1(0, 0) = 2;
@@ -461,7 +615,26 @@ TEST(MatrixTest, 26) {
   ASSERT_EQ(matrix1.getCols(), 3);
 }
 
-TEST(MatrixTest, 27) {
+TEST(SetterMatrix, 1) {
+  S21Matrix matrix1(3, 3);
+
+  matrix1(0, 0) = 2;
+  matrix1(0, 1) = 5;
+  matrix1(0, 2) = 7;
+  matrix1(1, 0) = 6;
+  matrix1(1, 1) = 3;
+  matrix1(1, 2) = 4;
+  matrix1(2, 0) = 5;
+  matrix1(2, 1) = -2;
+  matrix1(2, 2) = -3;
+
+  matrix1.setRows(4);
+  matrix1.setCols(4);
+  ASSERT_EQ(matrix1.getRows(), 4);
+  ASSERT_EQ(matrix1.getCols(), 4);
+}
+
+TEST(SetterMatrix, 2) {
   S21Matrix matrix1(3, 3);
   S21Matrix result(3, 2);
 
@@ -511,21 +684,39 @@ TEST(MatrixTest, 27) {
   ASSERT_TRUE(matrix2 == result2);
 }
 
-TEST(MatrixTest, 28) {
-  S21Matrix matrix1(2, 2);
+TEST(SetterMatrix, 3) {
+  S21Matrix matrix1(3, 3);
 
-  matrix1(0, 0) = 1;
-  matrix1(0, 1) = 2;
-  matrix1(1, 0) = 3;
-  matrix1(1, 1) = 4;
+  matrix1(0, 0) = 2;
+  matrix1(0, 1) = 5;
+  matrix1(0, 2) = 7;
+  matrix1(1, 0) = 6;
+  matrix1(1, 1) = 3;
+  matrix1(1, 2) = 4;
+  matrix1(2, 0) = 5;
+  matrix1(2, 1) = -2;
+  matrix1(2, 2) = -3;
 
-  S21Matrix matrix2(matrix1);
+  EXPECT_THROW(matrix1.setRows(-1), invalid_argument);
+}
 
-  EXPECT_TRUE(matrix1.eq_matrix(matrix2));
+TEST(SetterMatrix, 4) {
+  S21Matrix matrix1(3, 3);
+
+  matrix1(0, 0) = 2;
+  matrix1(0, 1) = 5;
+  matrix1(0, 2) = 7;
+  matrix1(1, 0) = 6;
+  matrix1(1, 1) = 3;
+  matrix1(1, 2) = 4;
+  matrix1(2, 0) = 5;
+  matrix1(2, 1) = -2;
+  matrix1(2, 2) = -3;
+
+  EXPECT_THROW(matrix1.setCols(-1), invalid_argument);
 }
 
 int main(int argc, char *argv[]) {
-
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
