@@ -24,7 +24,7 @@ PATH := $(PATH):$(BREW)/bin
 GCOV = --coverage
 PROJECT_NAME := s21_matrix_oop
 
-all: clean style ${PROJECT_NAME}.a leaks gcov_report
+all: clean style ${PROJECT_NAME}.a gcov_report
 
 $(PROJECT_NAME).a: ${SOURCE} ${HEADERS}
 	$(info                                         )
@@ -43,20 +43,21 @@ test: $(TESTS) ${PROJECT_NAME}.a
 	$(CC) $^ $(ADD_LIB) -o $@  
 	./$@
 
+.PHONY: gcov_report
 gcov_report: clean lcov ${SOURCE} ${TESTS} 
 	$(info                                         )
 	$(info ----------------------------------------)
 	$(info Create tests coverage report            )
 	$(info ----------------------------------------)
 	mkdir report
-	$(CC) -c $(CPPFLAGS) $(ADD_LIB) $(GCOV) ${SOURCE} 
+	$(CC) -c $(CPPFLAGS) $(ADD_LIB) $(GCOV) ${SOURCE}  
 	$(CC) -o $@ $(GCOV) $(OBJECTS) $(TESTS) $(ADD_LIB)
 	./$@
 	lcov -t $@ -o $@.info -c -d . --no-external
 	genhtml -o report/ $@.info
 
 ifeq ($(_UNAME_), Darwin) # MacOS
-	open $(BROWSER_APP)./ report/src/index.html
+	open report/src/index.html
 else
 	$(BROWSER_APP)./ report/src/index.html
 endif
